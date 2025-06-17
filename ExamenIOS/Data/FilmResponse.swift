@@ -16,10 +16,10 @@ struct Film : Codable {
     let Title: String
     let Poster: String
     let Year: String
-    let Plot: String
-    let Runtime: String
-    let Director: String
-    let Genre: String
-    let Country: String
+    let Plot: String?
+    let Runtime: String?
+    let Director: String?
+    let Genre: String?
+    let Country: String?
 }
 

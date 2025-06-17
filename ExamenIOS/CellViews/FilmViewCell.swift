@@ -10,7 +10,8 @@ import UIKit
 class FilmViewCell: UITableViewCell {
     
     @IBOutlet weak var posterView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var titleLabel: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
     
     func render(_ film: Film) {

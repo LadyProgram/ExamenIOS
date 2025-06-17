@@ -10,22 +10,46 @@ import UIKit
 class DetailViewController: UIViewController {
     
     var film: Film!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+    
+    
+    @IBOutlet weak var posterImage: UIImageView!
+    
+    @IBOutlet weak var yearLabel: UILabel!
+    @IBOutlet weak var runtimeLabel: UILabel!
+    @IBOutlet weak var directorLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var countryLabel: UILabel!
+    
+    @IBOutlet weak var plotLabel: UITextView!
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        navigationItem.title = film.Title
+        
+        posterImage.loadFrom(url: film.Poster)
+        yearLabel.text = film.Year
+        
+        searchFilmsById(id: film.imdbID)
+        
+       
+        }
+    
+    func searchFilmsById(id: String) {
+        Task {
+            let films = await FilmProvider.findFilmById(id: id)
+           film = films
+            
+            DispatchQueue.main.async {
+                [unowned self] in
+                
+                runtimeLabel.text = film.Runtime
+                directorLabel.text = film.Director
+                genreLabel.text = film.Genre
+                countryLabel.text = film.Country
+                plotLabel.text = film.Plot
+            }
+        }
     }
-    */
-
 }
